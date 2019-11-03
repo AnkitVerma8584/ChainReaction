@@ -23,12 +23,12 @@
             android:layout_below="@+id/Player1"
             android:text="Player 2: 0"
             android:textSize="30sp"/>
+
         <TextView
+            android:id="@+id/Gm"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/Gm"
-            android:layout_below="@+id/Player2"
-            />
+            android:layout_below="@+id/Player2" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -226,12 +226,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="15sp"/>
+
         <Button
             android:id="@+id/btn43"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
         <Button
             android:id="@+id/btn44"
             android:layout_width="0dp"

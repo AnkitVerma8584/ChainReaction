@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 for(i=0;i<6;i++)
                 for(j=0;j<6;j++)
-                 bt[i][j].setText("");
-
+                {  bt[i][j].setText("");
+               }
 
             }
         });
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     void check()
-    { for(i=0;i<6;i++)
+    {  
+        for(i=0;i<6;i++)
             for(j=0;j<6;j++)
                 str[i][j]=bt[i][j].getText().toString();
 
