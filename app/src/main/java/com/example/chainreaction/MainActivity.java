@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     void check()
-    {  
+    {
         for(i=0;i<6;i++)
             for(j=0;j<6;j++)
                 str[i][j]=bt[i][j].getText().toString();
@@ -60,14 +60,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int b=0;b<6;b++)
             {
                 if((a==0&&b==0)||(a==5&&b==5)||(a==5&&b==0)||(a==0&&b==5))
-                { if(str[a][b].equals("**"))
+                { if(str[a][b].equals("**")||str[a][b].length()>2)
                     increase(a,b);
                 }
                 if( (a==0&&(b!=0)&&b!=5)||(a==5&&(b!=0)&&b!=5)||(b==0&&(a!=0)&&a!=5)||(b==5&&(a!=0)&&a!=5))
-                {if(str[a][b].equals("***"))
-                    increase(a,b); }
-                if(a>0&&a<5&&b>0&&b<5){
-                    if(str[a][b].equals("****"))
+                {
+                    if(str[a][b].equals("***")||str[a][b].length()>3)
+                    increase(a,b);
+                }
+                if(a>0&&a<5&&b>0&&b<5)
+                {
+                    if(str[a][b].equals("****")||str[a][b].length()>4)
                         increase(a,b);
                 }
             }
