@@ -4,7 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bt[][]=new Button[6][6];
     Button rst;
     int i,j;
-    static String str[][]=new String[6][6];
+    static String str[][]=new String[6][6],ss="***";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,70 +54,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         for(i=0;i<6;i++)
             for(j=0;j<6;j++)
-                str[i][j]=bt[i][j].getText().toString();
-
+                str[i][j]=bt[i][j].getText().toString().trim();
         for(int a=0;a<6;a++)
             for(int b=0;b<6;b++)
             {
                 if((a==0&&b==0)||(a==5&&b==5)||(a==5&&b==0)||(a==0&&b==5))
-                { if(str[a][b].equals("**")||str[a][b].length()>2)
-                    increase(a,b);
+                { if(str[a][b].length()>1)
+                 {increase(a,b,str[a][b].length());}
                 }
                 if( (a==0&&(b!=0)&&b!=5)||(a==5&&(b!=0)&&b!=5)||(b==0&&(a!=0)&&a!=5)||(b==5&&(a!=0)&&a!=5))
                 {
-                    if(str[a][b].equals("***")||str[a][b].length()>3)
-                    increase(a,b);
+                    if(str[a][b].length()>2)
+                    {increase(a,b,str[a][b].length());}
                 }
                 if(a>0&&a<5&&b>0&&b<5)
                 {
-                    if(str[a][b].equals("****")||str[a][b].length()>4)
-                        increase(a,b);
+                    if(str[a][b].length()>3)
+                    {increase(a,b,str[a][b].length());
+                    }
+
                 }
             }
 
     }
-    void increase(int a,int b)
+    void increase(int a,int b,int c)
     {   if(a==0&&b==0)
         {
             bt[a+1][b].setText(bt[a+1][b].getText().toString()+"*");bt[a][b+1].setText(bt[a][b+1].getText().toString()+"*");
+            c=c%2;
+            bt[a][b].setText(ss.substring(0,c));
+
         }
         if(a==5&&b==5)
         {
-            bt[a-1][b].setText(bt[a-1][b].getText().toString()+"*");bt[a][b-1].setText(bt[a][b-1].getText().toString()+"*");
+            bt[a][b-1].setText(bt[a][b-1].getText().toString()+"*");bt[a-1][b].setText(bt[a-1][b].getText().toString()+"*");
+            c=c%2;
+            bt[a][b].setText(ss.substring(0,c));
         }
         if(a==5&&b==0)
         {
             bt[a-1][b].setText(bt[a-1][b].getText().toString()+"*"); bt[a][b+1].setText(bt[a][b+1].getText().toString()+"*");
+            c=c%2;
+            bt[a][b].setText(ss.substring(0,c));
         }
         if(a==0&&b==5)
         {
-            bt[a+1][b].setText(bt[a+1][b].getText().toString()+"*"); bt[a][b-1].setText(bt[a][b-1].getText().toString()+"*");
+             bt[a][b-1].setText(bt[a][b-1].getText().toString()+"*");bt[a+1][b].setText(bt[a+1][b].getText().toString()+"*");
+            c=c%2;
+            bt[a][b].setText(ss.substring(0,c));
         }
         if (a==0&&(b!=0)&&b!=5)
-        {bt[a + 1][b].setText(bt[a + 1][b].getText().toString() + "*");
+        {   bt[a + 1][b].setText(bt[a + 1][b].getText().toString() + "*");
             bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");
-            bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");}
+            bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");
+            c=c%3;
+            bt[a][b].setText(ss.substring(0,c));
+        }
         if (a==5&&(b!=0)&&b!=5)
-        { bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");
+        {   bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");
             bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");
             bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
+            c=c%3;
+            bt[a][b].setText(ss.substring(0,c));
         }
         if ((b==0)&&(a!=0)&&(a!=5))
-        {bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
+        {   bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
             bt[a + 1][b].setText(bt[a + 1][b].getText().toString() + "*");
-            bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");}
+            bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");
+            c=c%3;
+            bt[a][b].setText(ss.substring(0,c));
+        }
         if ((b==5)&&(a!=0)&&(a!=5))
-        {bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
+        {   bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
             bt[a + 1][b].setText(bt[a + 1][b].getText().toString() + "*");
-            bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");}
+            bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");
+            c=c%3;
+            bt[a][b].setText(ss.substring(0,c));
+        }
 
         else if(a>0&&a<5&&b>0&&b<5){
             bt[a - 1][b].setText(bt[a - 1][b].getText().toString() + "*");
             bt[a + 1][b].setText(bt[a + 1][b].getText().toString() + "*");
             bt[a][b + 1].setText(bt[a][b + 1].getText().toString() + "*");
             bt[a][b - 1].setText(bt[a][b - 1].getText().toString() + "*");
+            c=c%4;
+            bt[a][b].setText(ss.substring(0,c));
         }
-        bt[a][b].setText("");
+
+
         check();
 
     }

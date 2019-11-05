@@ -28,7 +28,8 @@
             android:id="@+id/Gm"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@+id/Player2" />
+            android:layout_below="@+id/Player2"
+            android:background="#FFFFFF" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
