@@ -30,14 +30,16 @@
             android:layout_height="60dp"
             android:layout_below="@+id/Player2"
             android:background="#FFFFFF" />
+
         <Button
+            android:id="@+id/resetbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/resetbtn"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="17dp"
             android:layout_marginEnd="33dp"
-            android:text="Reset"/>
+            android:text="Reset" />
 
 
     </RelativeLayout>
@@ -50,35 +52,41 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:textSize="15sp"/>
         <Button
             android:id="@+id/btn01"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:textSize="15sp"/>
         <Button
             android:id="@+id/btn02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:textSize="15sp"/>
         <Button
             android:id="@+id/btn03"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+
             android:layout_weight="1"
             android:textSize="15sp"/>
         <Button
             android:id="@+id/btn04"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+
             android:layout_weight="1"
             android:textSize="15sp"/>
         <Button
             android:id="@+id/btn05"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+
             android:layout_weight="1"
             android:textSize="15sp"/>
     </LinearLayout>
