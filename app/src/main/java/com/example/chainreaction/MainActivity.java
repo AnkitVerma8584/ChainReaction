@@ -4,13 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button bt[][]=new Button[6][6];
+    static Button bt[][]=new Button[6][6];
     Button rst;
-    int i,j;
+    TextView p1,p2;
+    static int i,j,pl1=0,pl2=0;
+    int c=0,p1pts=0,p2pts=0;
     boolean p1turn=true,p2turn;
     static char ch;
     static String str[][]=new String[6][6],t="\u25CF",u="\u25CB",ss=(t+t+t+t),rr=(u+u+u+u);
@@ -20,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rst=findViewById(R.id.resetbtn);
+        p1=findViewById(R.id.Player1);
+        p2=findViewById(R.id.Player2);
         for(i=0;i<6;i++)
         {
             for(j=0;j<6;j++)
@@ -33,14 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(i=0;i<6;i++)
-                    for(j=0;j<6;j++)
-                    {  bt[i][j].setText("");
-                    }
+                reset();
                 p1turn=true;
-                    p2turn=false;
-                    ch='\0';
-
+                p2turn=false;
+                p1.setText("Player 1 : 0");
+                p2.setText("Player 2 : 0");
             }
         });
 
@@ -54,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(((Button) v).getText().toString().equals("")||ch=='\u25CF')
             {((Button) v).setText(((Button) v).getText().toString() + t);
             p2turn=true;
-            p1turn=false;}
+            p1turn=false;
+            c++;}
         }
 
         else if(p2turn) {
@@ -62,21 +67,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {  ((Button) v).setText(((Button) v).getText().toString() + u);
                 p2turn=false;
                 p1turn=true;
+                c++;
             }
         }
         ch='\0';
+
         check();
+        if(c>2)
+        whowin();
+
 
     }
-    void check()
+    void reset()
+    {
+        for(i=0;i<6;i++)
+            for(j=0;j<6;j++)
+            {  bt[i][j].setText("");
+            }
+
+        ch='\0';
+        c=0;
+        p1pts = p2pts=0;
+
+    }
+    void whowin()
+    {
+        gtval();
+        for(i=0;i<6;i++)
+            for(j=0;j<6;j++)
+            {   if(!str[i][j].equals(""))
+                {if(str[i][j].charAt(0)=='\u25CF')
+                    pl1++;
+                 if(str[i][j].charAt(0)=='\u25CB')
+                    pl2++;
+                }
+            }
+        if(pl1>1&&pl2==0)
+        {     Toast.makeText(this,"Player 1 wins",Toast.LENGTH_SHORT).show();
+            p1pts++;
+            p1update();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    reset();
+
+                }
+            },1500);
+
+        }
+        if(pl2>1&&pl1==0) {
+            Toast.makeText(this, "Player 2 wins", Toast.LENGTH_SHORT).show();
+            p2pts++;
+            p2update();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    reset();
+
+                }
+            },1500);
+
+        }
+        pl1=pl2=0;
+    }
+    static void gtval()
     {
         for(i=0;i<6;i++)
             for(j=0;j<6;j++) {
                 str[i][j] = bt[i][j].getText().toString().trim();
 
             }
-
-
+    }
+    void check()
+    {   gtval();
         for(int a=0;a<6;a++)
             for(int b=0;b<6;b++)
             {
@@ -99,14 +162,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
     }
+    void p1update()
+    {
+        String s=p1.getText().toString().trim();
+        s=s.substring(0,s.indexOf(':'))+": "+p1pts;
+        p1.setText(s);
+
+    }
+    void p2update()
+    {
+        String s=p1.getText().toString().trim();
+        s=s.substring(0,s.indexOf(':'))+": "+p2pts;
+        p2.setText(s);
+    }
     void increase(int a,int b,int c,char tt)
     {   if(a==0&&b==0)
-    {
+        {
         bt[a+1][b].setText(bt[a+1][b].getText().toString()+tt);bt[a][b+1].setText(bt[a][b+1].getText().toString()+tt);
         c=c%2;
         bt[a][b].setText(ss.substring(0,c));
-
-    }
+        }
         if(a==5&&b==5)
         {
             bt[a][b-1].setText(bt[a][b-1].getText().toString()+tt);bt[a-1][b].setText(bt[a-1][b].getText().toString()+tt);
